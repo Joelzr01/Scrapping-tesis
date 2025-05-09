@@ -3,7 +3,7 @@ pandas
 matplotlib
 networkx
 numpy
-cholarly
+scholarly
 sklearn
 io
 datetime
