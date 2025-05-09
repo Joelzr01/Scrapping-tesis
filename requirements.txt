@@ -1,7 +1,8 @@
+streamlit
+scholarly
 networkx
 matplotlib
-numpy
-scholarly
-streamlit
+scikit-learn
 pandas
+numpy
 mplcursors
