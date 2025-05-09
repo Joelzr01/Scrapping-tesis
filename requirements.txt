@@ -1,0 +1,13 @@
+streamlit
+pandas
+matplotlib
+networkx
+numpy
+cholarly
+sklearn
+io
+datetime
+mplcursors
+Kmeans
+TfidfVectorizer
+PCA
