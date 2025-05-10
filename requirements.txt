@@ -1,13 +1,8 @@
 streamlit
-pandas
-matplotlib
+scholarly
 networkx
+matplotlib
+scikit-learn
+pandas
 numpy
-cholarly
-sklearn
-io
-datetime
 mplcursors
-Kmeans
-TfidfVectorizer
-PCA
