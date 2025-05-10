@@ -47,14 +47,6 @@ def crear_grafo(articulos, etiquetas=None):
                 else:
                     G.add_edge(autor1, autor2, coautoria=True)
 
-    # Relaciones por misma revista
-    for autor1 in G.nodes:
-        for autor2 in G.nodes:
-            if autor1 != autor2 and not G.has_edge(autor1, autor2):
-                revistas1 = set(revista_por_autor.get(autor1, []))
-                revistas2 = set(revista_por_autor.get(autor2, []))
-                if revistas1 & revistas2:
-                    G.add_edge(autor1, autor2, misma_revista=True)
 
     # Relaciones por cluster de contenido (si hay etiquetas)
     if etiquetas is not None:
@@ -78,7 +70,7 @@ def crear_grafo(articulos, etiquetas=None):
 
 
 def mostrar_grafo(G):
-    st.subheader("Grafo de relaciones por coautoría, revista y contenido")
+    st.subheader("Grafo de relaciones por coautoría y contenido")
 
     pos = nx.spring_layout(G, seed=42)
     plt.figure(figsize=(12, 9))
@@ -90,10 +82,6 @@ def mostrar_grafo(G):
     edges_coautoria = [(u, v) for u, v, d in G.edges(data=True) if d.get("coautoria")]
     nx.draw_networkx_edges(G, pos, edgelist=edges_coautoria, edge_color='black', width=2)
 
-    # Misma revista
-    edges_revista = [(u, v) for u, v, d in G.edges(data=True) if d.get("misma_revista")]
-    nx.draw_networkx_edges(G, pos, edgelist=edges_revista, edge_color='green', style='dashed', width=1.5)
-
     # Similitud de contenido
     edges_similitud = [(u, v) for u, v, d in G.edges(data=True) if d.get("similitud_contenido")]
     nx.draw_networkx_edges(G, pos, edgelist=edges_similitud, edge_color='blue', style='dotted', width=1.5)
@@ -102,7 +90,6 @@ def mostrar_grafo(G):
     from matplotlib.lines import Line2D
     legend_elements = [
         Line2D([0], [0], color='black', lw=2, label='Coautoría'),
-        Line2D([0], [0], color='green', lw=2, linestyle='dashed', label='Misma revista'),
         Line2D([0], [0], color='blue', lw=2, linestyle='dotted', label='Similitud de contenido'),
     ]
     plt.legend(handles=legend_elements, loc='best')
